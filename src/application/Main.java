@@ -17,7 +17,7 @@ public class Main extends Application {
 			
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/BankApplicationView.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root,600,400);
 			
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Log in Window");
