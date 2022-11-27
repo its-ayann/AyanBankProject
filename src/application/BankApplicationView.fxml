@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="354.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="396.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="59.0" prefWidth="514.0">
          <children>
@@ -29,22 +29,17 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="514.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="514.0">
          <children>
             <Label text="Account Number">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Label>
-            <TextField prefHeight="31.0" prefWidth="300.0">
+            <TextField fx:id="accountNumberTextField" prefHeight="31.0" prefWidth="300.0" promptText="000000-0">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </TextField>
-            <RadioButton mnemonicParsing="false" text="Save Log In">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </RadioButton>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -53,21 +48,40 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Label>
-            <TextField prefHeight="31.0" prefWidth="300.0">
+            <PasswordField fx:id="passwordTextField" prefHeight="31.0" prefWidth="300.0">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin></TextField>
-            <RadioButton mnemonicParsing="false" text="Show Password" />
+               </HBox.margin>
+            </PasswordField>
+            <RadioButton fx:id="showPasswordRadioButton" mnemonicParsing="false" text="Show Password">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </RadioButton>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Hyperlink text="Forgot Password">
+            <Label text="Remember Me">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <CheckBox fx:id="rememberMeCheckBox" mnemonicParsing="false">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </CheckBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Hyperlink fx:id="forgotPasswordHyperLink" text="Forgot Password">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Hyperlink>
-            <Button mnemonicParsing="false" text="Sign In">
+            <Button fx:id="signInButton" mnemonicParsing="false" text="Sign In">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
