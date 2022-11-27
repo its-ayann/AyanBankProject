@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="396.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="396.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BankApplicationLoginController">
    <children>
       <HBox alignment="CENTER" prefHeight="59.0" prefWidth="514.0">
          <children>
@@ -48,12 +48,13 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Label>
-            <PasswordField fx:id="passwordTextField" prefHeight="31.0" prefWidth="300.0">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </PasswordField>
-            <RadioButton fx:id="showPasswordRadioButton" mnemonicParsing="false" text="Show Password">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="showPasswordTextField" layoutY="28.0" prefHeight="31.0" prefWidth="300.0" />
+                  <PasswordField fx:id="passwordTextField" layoutY="28.0" prefHeight="31.0" prefWidth="300.0" />
+               </children>
+            </AnchorPane>
+            <RadioButton fx:id="showPasswordRadioButton" mnemonicParsing="false" onAction="#showPassword" text="Show Password">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
@@ -76,12 +77,12 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Hyperlink fx:id="forgotPasswordHyperLink" text="Forgot Password">
+            <Hyperlink fx:id="forgotPasswordHyperLink" onAction="#forgotPassword" text="Forgot Password">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Hyperlink>
-            <Button fx:id="signInButton" mnemonicParsing="false" text="Sign In">
+            <Button fx:id="signInButton" mnemonicParsing="false" onAction="#signIn" text="Sign In">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
