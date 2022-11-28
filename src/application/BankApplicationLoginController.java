@@ -7,6 +7,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -20,6 +21,23 @@ import javafx.stage.Stage;
 
 public class BankApplicationLoginController {
 	Stage applicationStage;
+	
+	
+	private Stage primaryStage;
+	private Scene myScene;
+	private ForgotPasswordController nextSceneController;
+	
+	public void setPrimaryStage(Stage aStage) {
+		primaryStage = aStage;
+	}
+	
+	public void setMyScene(Scene aScene) {
+		myScene = aScene;
+	}
+	
+	public void takeFocus() {
+		primaryStage.setScene(myScene);
+	}
 
     @FXML
     private CheckBox rememberMeCheckBox;
@@ -60,6 +78,35 @@ public class BankApplicationLoginController {
     @FXML
     void forgotPassword(ActionEvent event) {
     	
+    	
+    	try {
+			FXMLLoader forgotPasswordLoader = new FXMLLoader();
+			
+			//VBox root = forgotPasswordLoader.load(new FileInputStream("src/application/ForgotPasswordView.fxml"));
+			
+			Parent root = forgotPasswordLoader.load(new FileInputStream("src/application/ForgotPasswordView.fxml"));
+			
+			Stage window = (Stage) forgotPasswordHyperLink.getScene().getWindow();
+			window.setScene(new Scene(root,600,400));
+			
+			//Scene forgotPassword = new Scene(root, 600,400);
+    		
+			//applicationStage.setScene(forgotPassword);
+    		//applicationStage.setTitle("Reset Password");
+			
+			//nextSceneController = forgotPasswordLoader.getController();
+			//nextSceneController.setPrimaryStage(primaryStage);
+			//nextSceneController.setMyScene(new Scene(root));
+			//nextSceneController.setNextController(this);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	//nextSceneController.takeFocus();
+    
 
     }
 
