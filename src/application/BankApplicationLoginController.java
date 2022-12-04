@@ -60,6 +60,8 @@ public class BankApplicationLoginController {
     @FXML
     private Button signInButton;
     
+  
+    
     @FXML
     void showPassword(ActionEvent event) {
     	if (showPasswordRadioButton.isSelected()) {
@@ -109,6 +111,7 @@ public class BankApplicationLoginController {
     
 
     }
+    
 
 
     @FXML
@@ -120,11 +123,25 @@ public class BankApplicationLoginController {
     		
     		
     		try {
-    			FXMLLoader accountDashboardLoader = new FXMLLoader();
-    			VBox root = accountDashboardLoader.load(new FileInputStream("src/application/AccountDashboardView.fxml"));
+    			//FXMLLoader accountDashboardLoader = new FXMLLoader();
+    			FXMLLoader loader = new FXMLLoader();
+    			//VBox root = accountDashboardLoader.load(new FileInputStream("src/application/AccountDashboardView.fxml"));
+    			
+    			//Parent root = accountDashboardLoader.load(new FileInputStream("src/application/AccountDashboardView.fxml"));
+    			Parent root = loader.load(new FileInputStream("src/application/AccountDashboardView.fxml"));
+    			AccountDashboardController controller = (AccountDashboardController) loader.getController();
+    			
+    			controller.applicationStage = primaryStage;
     			Scene accountDashboard = new Scene(root, 600,400);
-        		applicationStage.setScene(accountDashboard);
+    			
+    			
+        		//Stage window = (Stage) signInButton.getScene().getWindow();
+        		//window.setScene(new Scene(root,600,400));
+        		
+    			
+    			applicationStage.setScene(accountDashboard);
         		applicationStage.setTitle("Account Dashboard");
+    			
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
