@@ -73,8 +73,8 @@ public class AccountDashboardController {
     	
      */
    
-    Account chequingAccount = new Account("Ayan", 123, 300.00, "Chequing");
-    Account savingAccount = new Account("Ayan", 84190, 800.00, "Saving");
+    Account chequingAccount = new Account("Ayan Ahmed", 123, 300.00, "Chequing");
+    Account savingAccount = new Account("John Doe", 84190, 800.00, "Saving");
     
     public String getSelectAccountButtonLabel() {
     	if (selectAccountButton.getText() == null) {
@@ -160,6 +160,7 @@ public class AccountDashboardController {
         		System.out.println(saw.getSelectAccountComboBox());
         		//chequingSelected = true;
         		account = chequingAccount;
+        		nameLabel.setText(account.getName());
         		//accountTypeComboBox.setValue(Account.selectedAccount);
         		
         		//account = new Account("Ayan", 123, 300);
@@ -178,6 +179,7 @@ public class AccountDashboardController {
         	
         	} else if (saw.getSelectAccountComboBox().equals("SAVINGS ACCOUNT 84190")) {
         		account = savingAccount;
+        		nameLabel.setText(account.getName());
         		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
         		//balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
         		/*
