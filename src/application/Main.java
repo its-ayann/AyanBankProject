@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -16,11 +17,17 @@ public class Main extends Application {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/application/BankApplicationView.fxml"));
-			Scene scene = new Scene(root,400,400);
+			//VBox root = loader.load(new FileInputStream("src/application/BankApplicationView.fxml"));
+			Parent root = loader.load(new FileInputStream("src/application/BankApplicationView.fxml"));
+			BankApplicationLoginController controller = (BankApplicationLoginController) loader.getController();
+			controller.applicationStage = primaryStage;
+			
+			Scene scene = new Scene(root,600,400);
+			
+			//controller.setMyScene(scene);
 			
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Log in Window");
+			primaryStage.setTitle("Login Window");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
