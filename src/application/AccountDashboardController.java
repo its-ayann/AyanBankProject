@@ -61,7 +61,20 @@ public class AccountDashboardController {
     
    //private String selectedAccount;
     private String selectedAccount;
+    /*
+     		System.out.println("SSSSSSS: " + account.getBalance());
+    		account.setName("Ayan");
+    		account.setAccountNumber(012432);
+    		account.setBalance(300);
+    		account.setAccountType("Chequing");
+    		System.out.println("SSSSSSS: " + account.getBalance());
+    		System.out.println(accoutType);
+    		account = new Account("Ayan", 84190, 800, "Saving");
+    	
+     */
    
+    Account chequingAccount = new Account("Ayan", 123, 300.00, "Chequing");
+    Account savingAccount = new Account("Ayan", 84190, 800.00, "Saving");
     
     public String getSelectAccountButtonLabel() {
     	if (selectAccountButton.getText() == null) {
@@ -113,24 +126,30 @@ public class AccountDashboardController {
     		//accountTypeComboBox.setValue(Account.selectedAccount);
     		
     		//account = new Account("Ayan", 123, 300);
+    		
     		System.out.println("SSSSSSS: " + account.getBalance());
     		account.setName("Ayan");
-    		account.setAccountNumber(123);
+    		account.setAccountNumber(012432);
     		account.setBalance(300);
     		account.setAccountType("Chequing");
     		System.out.println("SSSSSSS: " + account.getBalance());
     		
-    		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+    		//balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+    		balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
     	
     	} else if (accoutType.equals("SAVINGS ACCOUNT 84190")) {
+    		
     		System.out.println(accoutType);
-    		account = new Account("Ayan", 456, 800, "Saving");
-    		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+    		account = new Account("Ayan", 84190, 800, "Saving");
+    		//balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+    		balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
+    		
     	} else {
     		balanceLabel.setText("");
     	}
     	
     }
+    
     
     @FXML
     void selectAccount (ActionEvent event) {
@@ -139,24 +158,33 @@ public class AccountDashboardController {
     		selectAccountButton.setText(saw.getSelectAccountComboBox());
     		if (saw.getSelectAccountComboBox().equals("CHEQUING ACCOUNT 012432")) {
         		System.out.println(saw.getSelectAccountComboBox());
-        		chequingSelected = true;
-        		
+        		//chequingSelected = true;
+        		account = chequingAccount;
         		//accountTypeComboBox.setValue(Account.selectedAccount);
         		
         		//account = new Account("Ayan", 123, 300);
+        		/*
         		System.out.println("SSSSSSS: " + account.getBalance());
         		account.setName("Ayan");
         		account.setAccountNumber(123);
         		account.setBalance(300);
         		account.setAccountType("Chequing");
+        		nameLabel.setText(account.getName());
         		System.out.println("SSSSSSS: " + account.getBalance());
-        		
+        		*/
         		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+        		System.out.println("is it working: " + account.getBalance());
+        		//balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
         	
         	} else if (saw.getSelectAccountComboBox().equals("SAVINGS ACCOUNT 84190")) {
+        		account = savingAccount;
+        		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+        		//balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
+        		/*
         		System.out.println(saw.getSelectAccountComboBox());
         		account = new Account("Ayan", 123, 800, "Saving");
         		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+        		*/
         	}
     		
     	}
@@ -204,13 +232,27 @@ public class AccountDashboardController {
     	
     }
    
-    
-    DepositWindow dw = new DepositWindow(account);
+ 
+    //DepositWindow dw = new DepositWindow(account);
 
     @FXML
     void deposit(ActionEvent event) {
+    	
+    	if (selectAccountButton.getText().equals("CHEQUING ACCOUNT 012432")) {
+    		 DepositWindow dw = new DepositWindow(chequingAccount);
+    		 dw.displayDepositWindow();
+    		balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
+    	} else if (selectAccountButton.getText().equals("SAVINGS ACCOUNT 84190")){
+    		DepositWindow dw = new DepositWindow(savingAccount);
+    		dw.displayDepositWindow();
+    		balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
+    	}
+    	/*
+    	System.out.println("going in " + account.getBalance());
     	dw.displayDepositWindow();
     	balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+    	*/
+    	//balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
     	
     	//Scene mainScene = depositButton.getScene();
     	
@@ -334,22 +376,57 @@ public class AccountDashboardController {
 		//balanceLabel.setText("$" + String.valueOf(account.getBalance()));
 		
 		
-
+	System.out.println("chequing: " + chequingAccount.getBalance());
+	System.out.println("dispalyed: " + account.getBalance());
+	//System.out.println("saving: " + savingAccount.getBalance());
     }
     
     
-    WithdrawWindow ww = new WithdrawWindow(account);
+    //WithdrawWindow ww = new WithdrawWindow(account);
 
     @FXML
     void withdraw(ActionEvent event) {
+    	
+		if (selectAccountButton.getText().equals("CHEQUING ACCOUNT 012432")) {
+			WithdrawWindow ww = new WithdrawWindow(chequingAccount);
+			ww.displayWithdrawWindow();
+			balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
+	} else if (selectAccountButton.getText().equals("SAVINGS ACCOUNT 84190")){
+		WithdrawWindow ww = new WithdrawWindow(savingAccount);
+		ww.displayWithdrawWindow();
+		balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
+	}
+    	/*
     	ww.displayWithdrawWindow();
     	balanceLabel.setText("$" + String.valueOf(account.getBalance()));
+    	System.out.println("chequing: " + chequingAccount.getBalance());
+    	System.out.println("saving: " + savingAccount.getBalance());
+    	*/
 
     }
+    
+   // TransferWindow tw = new TransferWindow(account);
+    //TransferWindow t = new TransferWindow();
+    TransferWindow chequingToSaving = new TransferWindow(savingAccount,chequingAccount);
+    TransferWindow savingToChequing = new TransferWindow(chequingAccount,savingAccount);
 
     @FXML
     void transfer(ActionEvent event) {
-
+    	System.out.println("transfer" + selectAccountButton.getText());
+    	if (selectAccountButton.getText().equals("CHEQUING ACCOUNT 012432")) {
+    		//TransferWindow t = new TransferWindow(savingAccount,chequingAccount);
+    		chequingToSaving.displayTransferWindow();
+    		balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
+    	} else if (selectAccountButton.getText().equals("SAVINGS ACCOUNT 84190")){
+    		//TransferWindow t = new TransferWindow(chequingAccount,savingAccount);
+    		savingToChequing.displayTransferWindow();
+    		balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
+    	}
+    	//tw.displayTransferWindow();
+    	//t.displayTransferWindow();
+    	//balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
+    	System.out.println("chequing: " + chequingAccount.getBalance());
+    	System.out.println("saving: " + savingAccount.getBalance());
     }
 
     @FXML

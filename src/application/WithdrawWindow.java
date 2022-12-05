@@ -48,36 +48,37 @@ public class WithdrawWindow {
     	HBox title = new HBox();
     	Label withdrawTitle = new Label("Withdraw Amount");
     	withdrawTitle.setFont(Font.font("Franklin Gothic Medium", 30));
-    	withdrawTitle.setPadding(new Insets(10,10,10,10));
     	title.setAlignment(Pos.TOP_LEFT);
+    	HBox.setMargin(withdrawTitle, new Insets(10, 10, 10, 10));
     	
     	HBox money = new HBox();
     	Label dollarSign = new Label("$");
     	dollarSign.setFont(Font.font("Franklin Gothic Medium", 15));
-    	dollarSign.setPadding(new Insets(10,0,10,10));
+    	//dollarSign.setPadding(new Insets(10,0,10,10));
     	amount = new TextField();
     	amount.setPrefSize(218, 30);
     	//amount.setPadding(new Insets(10,10,10,0));
     	money.setAlignment(Pos.CENTER);
+    	HBox.setMargin(dollarSign, new Insets(10, 0, 10, 10));
+    	HBox.setMargin(amount, new Insets(10, 10, 10, 0));
     	
     	HBox message = new HBox();
     	errorMessage = new Label("");
-		errorMessage.setPadding(new Insets(10,10,10,10));
+		//errorMessage.setPadding(new Insets(10,10,10,10));
 		errorMessage.setFont(Font.font("Franklin Gothic Medium", 12));
 		errorMessage.setTextFill(Color.color(1, 0, 0));
+		HBox.setMargin(errorMessage, new Insets(10, 10, 10, 10));
     	
     	
     	HBox buttons = new HBox();
     	Button withdraw = new Button("Withdraw");
-    	withdraw.setPadding(new Insets(10,10,10,10));
     	Button cancel = new Button("Cancel");
-    	cancel.setPadding(new Insets(10,10,10,10));
     	buttons.setAlignment(Pos.CENTER_RIGHT);
+    	HBox.setMargin(withdraw, new Insets(10, 10, 10, 10));
+    	HBox.setMargin(cancel, new Insets(10, 10, 10, 10));
     	
-    	//withdraw.setOnAction(withdrawEvent -> account.withdraw1(Double.parseDouble(amount.getText())));
+   
     	withdraw.setOnAction(withdrawEvent -> checkWithdraw());
-    	//deposit1.setOnAction(depositEvent -> account.deposit(Double.parseDouble(amount.getText())));
-    	
     	cancel.setOnAction(cancelEvent -> window.close());
     	
     	
@@ -94,7 +95,93 @@ public class WithdrawWindow {
 	}
     
 	
+	public void checkWithdraw() {
+		
+		String withdrawAmountText = amount.getText();
+		boolean validNumericInput = true;
+		int decimalCounter = 0;
+		
+		for (char c: amount.getText().toCharArray()) {
+    		
+    		// Check if the character is a digit
+    		if (!Character.isDigit(c)) {
+    			if (c!= '.') {
+    				validNumericInput = false;
+        			errorMessage.setText("Do not use " + c + " in a deposit amount. Make sure to enter a number.");
+    			} else if (decimalCounter != 0) {
+    				validNumericInput = false;
+    				errorMessage.setText("Do not use more than one decimal. Please enter a valid number");
+    			} else if (c == '.') {
+    				decimalCounter = decimalCounter + 1;
+    			}
+    		}
+		}
+		
+		while (validNumericInput) {
+			boolean validWithdrawAmount = true;
+			double withdrawAmount = Double.parseDouble(withdrawAmountText);
+			
+		
+	    	
+	    	// Check if the number entered by the user is a valid percentage grade
+	    	// If valid, include it in the grade computation
+	    	if (withdrawAmount <= 0) {
+	    		validWithdrawAmount = false;
+	    		errorMessage.setText("Enter a deposit value above $0.00. ");
+	    		withdrawAmount = 0;
+	    	} 
+	    	
+	    	else if (withdrawAmount < account.getBalance()) {
+	    		validWithdrawAmount = false;
+	    		errorMessage.setText("Insufficient Funds. Cannot withdraw more than current balance.");
+	    		withdrawAmount = 0;
+	    	}
+	    	else if (validWithdrawAmount = true) {
+	    		account.deposit(withdrawAmount);
+	        	window.close();
+	    	}	
+		}
+		
+		//double depositAmount =  0;
+		
+		//double depositAmount = Double.parseDouble(depositAmountText);
 	
+		/*
+    	if (validDepositAmount) {
+    		depositAmount = Double.parseDouble(depositAmountText);
+    	}
+    	*/
+    	//System.out.println(getChequingSelected());
+    	
+    	// Check if the number entered by the user is a valid percentage grade
+    	// If valid, include it in the grade computation
+    	/*
+		if (depositAmount <= 0) {
+    		errorMessage.setText("Enter a deposit value above $0.00. ");
+    		depositAmount = 0;
+    	} 
+    	if (validDepositAmount = true && depositAmount > 0) {
+    		account.deposit(depositAmount);
+        	window.close();
+    	}	
+    	*/
+    		//System.out.println("before: " + account.getBalance());
+    		//account.deposit(depositAmount);
+    		//System.out.println("after: " + account.getBalance());	
+    	//System.out.print(depositAmount);
+    	System.out.print("TESTING HERE: " + account.getBalance());
+    	//account.deposit(depositAmount);
+    	//window.close();
+    	
+    }
+}
+	
+	
+	
+	
+	
+	
+	/*
 	public void checkWithdraw() {
 		if (amount.getText().isEmpty()) {
 			errorMessage.setText("Please enter an amount to withdraw.");
@@ -102,7 +189,7 @@ public class WithdrawWindow {
 		
 		double withdrawAmount = Double.parseDouble(amount.getText());
 		
-		System.out.println("WWWWWWWW" + account.getBalance());
+		//System.out.println("WWWWWWWW" + account.getBalance());
 		
 		
 		if (withdrawAmount > account.getBalance()){
@@ -110,14 +197,14 @@ public class WithdrawWindow {
 			
 		} else {
 			account.withdraw1(withdrawAmount);
-			
 			window.close();
 		}
 		
 	}
+	*/
     
     	
 
-	}
+	
 
 

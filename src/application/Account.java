@@ -6,6 +6,9 @@ public class Account {
 	private int accountNumber;
 	private double balance;
 	private String accountType;
+	private String accountTo;
+	private String accountFrom;
+	private double amount;
 	
 	public static String selectedAccount;
 	
@@ -41,6 +44,30 @@ public class Account {
 		balance = aBalance;
 	}
 	
+	public String getAccountTo() {
+		return accountTo;
+	}
+	
+	public String getAccountFrom() {
+		return accountFrom;
+	}
+	
+	public void setAccountTo(String account) {
+		accountTo = account;
+	}
+	
+	public void setAccountFrom(String account) {
+		accountFrom = account;
+	}
+	
+	public double getAmount() {
+		return amount;
+	}
+	
+	public void setAmount(double anAmount) {
+		amount = anAmount;
+	}
+	
 	Account () {
 		
 	}
@@ -48,6 +75,15 @@ public class Account {
 		name = aName;
 		accountNumber = anAccountNumber;
 		balance = aBalance;
+		accountType = anAccountType;
+	}
+	
+	Account(String anAccountType, double aBalance) {
+		accountType = anAccountType;
+		balance = aBalance; 
+	}
+	
+	Account(String anAccountType) {
 		accountType = anAccountType;
 	}
 	
@@ -59,6 +95,10 @@ public class Account {
 		balance = balance - amount;
 	}
 	
+	public void transferTo(Account accountTo, Account accountFrom, double amount) {
+		accountTo.deposit(amount);
+		accountFrom.withdraw1(amount);
+	}
 	
 	
 

@@ -31,18 +31,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="accountTypeComboBox" onAction="#accountTypeComboBox" prefHeight="79.0" prefWidth="300.0">
-             <items>
-           			<FXCollections fx:factory="observableArrayList">
-           				<String fx:value="CHEQUING ACCOUNT 012432" />
-           				<String fx:value="SAVINGS ACCOUNT 84190" />
-           			</FXCollections>
-           		</items>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </ComboBox>
-            <Button fx:id="selectAccountButton" mnemonicParsing="false" onAction="#selectAccount" prefHeight="0.0" prefWidth="320.0">
+            <Button fx:id="selectAccountButton" mnemonicParsing="false" onAction="#selectAccount" prefHeight="0.0" prefWidth="320.0" text="Select an Account                                ▶">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>

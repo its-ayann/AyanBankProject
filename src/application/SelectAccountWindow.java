@@ -50,36 +50,38 @@ public class SelectAccountWindow {
 		VBox contents = new VBox();
 		Label message = new Label("Select Account");
 		message.setFont(Font.font("Franklin Gothic Medium", 30));
-		message.setPadding(new Insets(10,10,10,10));
+		//message.setPadding(new Insets(10,10,10,10));
 		message.setAlignment(Pos.TOP_LEFT);
+		HBox.setMargin(message, new Insets(10, 10, 10, 10));
 		
 		String accounts[] = {"CHEQUING ACCOUNT 012432", "SAVINGS ACCOUNT 84190"};
 		selectAccountComboBox = new ComboBox(FXCollections.observableArrayList(accounts));
-		selectAccountComboBox.setPadding(new Insets(10,10,10,10));
-		selectAccountComboBox.setPrefSize(218,30);
+		//selectAccountComboBox.setPadding(new Insets(10,10,10,10));
+		selectAccountComboBox.setPrefSize(330,20);
 		//selectAccountComboBox.getItems().addAll("CHEQUING ACCOUNT 012432", "SAVINGS ACCOUNT 84190");
 		selectAccountComboBox.setPromptText("Select Account");
 		selectAccountComboBox.maxHeight(31);
 		selectAccountComboBox.maxWidth(330);
 		
 		errorMessage = new Label("");
-		errorMessage.setPadding(new Insets(10,10,10,10));
+		//errorMessage.setPadding(new Insets(10,10,10,10));
 		errorMessage.setFont(Font.font("Franklin Gothic Medium", 12));
 		errorMessage.setTextFill(Color.color(1, 0, 0));
 		
+		HBox.setMargin(selectAccountComboBox, new Insets(10, 10, 10, 10));
+		HBox.setMargin(errorMessage, new Insets(10, 10, 10, 10));
+		
 		HBox buttons = new HBox();
 		Button select = new Button("Select");
-		select.setPadding(new Insets(10,10,10,10));
+		//select.setPadding(new Insets(10,10,10,10));
 		Button cancel = new Button("Cancel");
-		cancel.setPadding(new Insets(10,10,10,10));
+		//cancel.setPadding(new Insets(10,10,10,10));
 		buttons.setAlignment(Pos.CENTER_RIGHT);
+		HBox.setMargin(select, new Insets(10, 10, 10, 10));
+		HBox.setMargin(cancel, new Insets(10, 10, 10, 10));
+		
+		
 		cancel.setOnAction(e -> window.close());
-		
-	
-			
-		
-
-		
 		select.setOnAction(e -> checkInput());
 		
 		
