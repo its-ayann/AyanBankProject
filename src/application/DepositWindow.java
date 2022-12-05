@@ -141,24 +141,7 @@ public class DepositWindow {
     	System.out.print(validDepositAmount);
     	return depositAmount;
     }
-		/*
-		if (amount.getText().isEmpty()) {
-			errorMessage.setText("Please enter an amount to deposit.");
-		} 
 		
-		double depositAmount = Double.parseDouble(amount.getText());
-		
-		//System.out.println("WWWWWWWW" + account.getBalance());
-		
-		
-		if (depositAmount < 0){
-			errorMessage.setText("Please enter a valid amount to deposit");
-			
-		} else {
-			account.deposit(depositAmount);
-			window.close();
-		}
-		*/
 	
 	public void validDepo(double depositAmount) {
 		if (depositAmount <= 0){
@@ -171,10 +154,8 @@ public class DepositWindow {
 	}
 	
 	public void checkDeposit() {
-		//System.out.print("TESTING HERE: " + account.getName());
 		String depositAmountText = amount.getText();
-		//Double.parseDouble();
-		//System.out.println("ASASSASASA: "+ depositAmountText);
+		
 		boolean validNumericInput = true;
 		int decimalCounter = 0;
 		
@@ -194,16 +175,10 @@ public class DepositWindow {
     		}
 		}
 		
-		while (validNumericInput) {
+		if (validNumericInput = true) {
 			boolean validDepositAmount = true;
 			double depositAmount = Double.parseDouble(depositAmountText);
 			
-			/*
-	    	if (validDepositAmount) {
-	    		depositAmount = Double.parseDouble(depositAmountText);
-	    	}
-	    	*/
-	    	//System.out.println(getChequingSelected());
 	    	
 	    	// Check if the number entered by the user is a valid percentage grade
 	    	// If valid, include it in the grade computation
@@ -218,61 +193,12 @@ public class DepositWindow {
 	    	}	
 		}
 		
-		//double depositAmount =  0;
 		
-		//double depositAmount = Double.parseDouble(depositAmountText);
-	
-		/*
-    	if (validDepositAmount) {
-    		depositAmount = Double.parseDouble(depositAmountText);
-    	}
-    	*/
-    	//System.out.println(getChequingSelected());
-    	
-    	// Check if the number entered by the user is a valid percentage grade
-    	// If valid, include it in the grade computation
-    	/*
-		if (depositAmount <= 0) {
-    		errorMessage.setText("Enter a deposit value above $0.00. ");
-    		depositAmount = 0;
-    	} 
-    	if (validDepositAmount = true && depositAmount > 0) {
-    		account.deposit(depositAmount);
-        	window.close();
-    	}	
-    	*/
-    		//System.out.println("before: " + account.getBalance());
-    		//account.deposit(depositAmount);
-    		//System.out.println("after: " + account.getBalance());	
-    	//System.out.print(depositAmount);
-    	System.out.print("TESTING HERE: " + account.getBalance());
-    	//account.deposit(depositAmount);
-    	//window.close();
     	
     }
 }
 	
-	/*
-	public void checkDeposit() {
-		if (amount.getText().isEmpty()) {
-			errorMessage.setText("Please enter an amount to deposit.");
-		} 
-		
-		double depositAmount = Double.parseDouble(amount.getText());
-		
-		//System.out.println("WWWWWWWW" + account.getBalance());
-		
-		
-		if (depositAmount < 0){
-			errorMessage.setText("Please enter a valid amount to deposit");
-			
-		} else {
-			account.deposit(depositAmount);
-			window.close();
-		}
-	}
-	*/
-		
+	
 	
     
 

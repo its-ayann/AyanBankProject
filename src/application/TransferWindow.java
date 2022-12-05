@@ -2,6 +2,7 @@ package application;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -9,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -46,7 +49,9 @@ public class TransferWindow {
 		VBox transferContainer = new VBox();
 		
 		HBox title = new HBox();
-		Label transferTitle = new Label("Transfer");
+		Label transferTitle = new Label("Transfer Amount");
+		transferTitle.setFont(Font.font("Franklin Gothic Medium", 30));
+		transferTitle.setAlignment(Pos.TOP_LEFT);
 		HBox.setMargin(transferTitle, new Insets(10,10,10,10));
 		
 		VBox contents = new VBox();
@@ -57,7 +62,6 @@ public class TransferWindow {
 		accountToComboBox.maxHeight(31);
 		accountToComboBox.maxWidth(330);
 		//System.out.println("1" + account.getAccountType());
-		System.out.println("teest1" + accountFrom.getAccountType());
 		if (accountFrom.getAccountType().equals("Chequing")) {
 			accountToComboBox = new ComboBox(FXCollections.observableArrayList(savingAccount));
 		} else if (accountFrom.getAccountType().equals("Saving")) {
@@ -75,14 +79,22 @@ public class TransferWindow {
 		HBox.setMargin(transfer, new Insets(10,10,10,10));
 		HBox.setMargin(cancel, new Insets(10,10,10,10));
 		
+		HBox message = new HBox();
+    	errorMessage = new Label("");
+		errorMessage.setFont(Font.font("Franklin Gothic Medium", 12));
+		errorMessage.setTextFill(Color.color(1, 0, 0));
+		HBox.setMargin(errorMessage, new Insets(10, 10, 10, 10));
+		
+		
 		
 		transfer.setOnAction(transferEvent -> checkTransfer());
 		
 		title.getChildren().addAll(transferTitle);
 		contents.getChildren().addAll(accountToComboBox,amount);
 		buttons.getChildren().addAll(transfer,cancel);
+		message.getChildren().addAll(errorMessage);
 		
-		transferContainer.getChildren().addAll(title,contents,buttons);
+		transferContainer.getChildren().addAll(title,contents,buttons,message);
 		
 		Scene scene = new Scene(transferContainer);
     	window.setScene(scene);
@@ -90,6 +102,95 @@ public class TransferWindow {
 		
 	}
 	
+public void checkTransfer() {
+		
+		String transferAmountText = amount.getText();
+		boolean validNumericInput = true;
+		int decimalCounter = 0;
+		
+		if (amount.getText().isEmpty()) {
+			errorMessage.setText("Please enter an amount to transfer.");
+		} 
+		for (char c: amount.getText().toCharArray()) {
+    		
+    		// Check if the character is a digit
+    		if (!Character.isDigit(c)) {
+    			if (c!= '.') {
+    				validNumericInput = false;
+        			errorMessage.setText("Do not use " + c + " in a deposit amount. Make sure to enter a number.");
+    			} else if (decimalCounter != 0) {
+    				validNumericInput = false;
+    				errorMessage.setText("Do not use more than one decimal. Please enter a valid number");
+    			} else if (c == '.') {
+    				decimalCounter = decimalCounter + 1;
+    			}
+    		}
+		}
+		
+		if (validNumericInput = true) {
+			boolean validTransferAmount = true;
+			double transferAmount = Double.parseDouble(transferAmountText);
+			
+		
+	    	
+	    	// Check if the number entered by the user is a valid percentage grade
+	    	// If valid, include it in the grade computation
+	    	if (transferAmount <= 0) {
+	    		validTransferAmount = false;
+	    		errorMessage.setText("Enter an amount to transfer above $0.00. ");
+	    		transferAmount = 0;
+	    	} 
+	    	
+	    	else if (transferAmount > accountFrom.getBalance()) {
+	    		validTransferAmount = false;
+	    		errorMessage.setText("Insufficient Funds. Cannot transfer funds more than current balance.");
+	    		transferAmount = 0;
+	    	}
+	    	else if (validTransferAmount = true) {
+	    		accountTo.deposit(transferAmount);
+				accountFrom.withdraw1(transferAmount);
+	        	window.close();
+	    	}	
+		}
+		
+		//double depositAmount =  0;
+		
+		//double depositAmount = Double.parseDouble(depositAmountText);
+	
+		/*
+    	if (validDepositAmount) {
+    		depositAmount = Double.parseDouble(depositAmountText);
+    	}
+    	*/
+    	//System.out.println(getChequingSelected());
+    	
+    	// Check if the number entered by the user is a valid percentage grade
+    	// If valid, include it in the grade computation
+    	/*
+		if (depositAmount <= 0) {
+    		errorMessage.setText("Enter a deposit value above $0.00. ");
+    		depositAmount = 0;
+    	} 
+    	if (validDepositAmount = true && depositAmount > 0) {
+    		account.deposit(depositAmount);
+        	window.close();
+    	}	
+    	*/
+    		//System.out.println("before: " + account.getBalance());
+    		//account.deposit(depositAmount);
+    		//System.out.println("after: " + account.getBalance());	
+    	//System.out.print(depositAmount);
+    	//System.out.print("TESTING HERE: " + account.getBalance());
+    	//account.deposit(depositAmount);
+    	//window.close();
+    	
+    }
+
+	
+	
+	
+	
+	/*
 	public void checkTransfer() {
 		//System.out.println(account.getAccountNumber());
 		System.out.println(accountToComboBox.getSelectionModel().getSelectedItem().toString());
@@ -130,10 +231,11 @@ public class TransferWindow {
 			account.getAccountNumber();
 			//account.withdraw1(transferAmount);
 			*/
-			window.close();
-		}
+			//window.close();
+		//}
 		
-	}
+	//}
+	
 	
 
 }

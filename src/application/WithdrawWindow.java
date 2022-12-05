@@ -117,7 +117,7 @@ public class WithdrawWindow {
     		}
 		}
 		
-		while (validNumericInput) {
+		if (validNumericInput = true) {
 			boolean validWithdrawAmount = true;
 			double withdrawAmount = Double.parseDouble(withdrawAmountText);
 			
@@ -131,49 +131,22 @@ public class WithdrawWindow {
 	    		withdrawAmount = 0;
 	    	} 
 	    	
-	    	else if (withdrawAmount < account.getBalance()) {
+	    	else if (withdrawAmount > account.getBalance()) {
 	    		validWithdrawAmount = false;
 	    		errorMessage.setText("Insufficient Funds. Cannot withdraw more than current balance.");
 	    		withdrawAmount = 0;
 	    	}
 	    	else if (validWithdrawAmount = true) {
-	    		account.deposit(withdrawAmount);
+	    		account.withdraw1(withdrawAmount);
 	        	window.close();
 	    	}	
 		}
 		
-		//double depositAmount =  0;
 		
-		//double depositAmount = Double.parseDouble(depositAmountText);
-	
-		/*
-    	if (validDepositAmount) {
-    		depositAmount = Double.parseDouble(depositAmountText);
-    	}
-    	*/
-    	//System.out.println(getChequingSelected());
     	
-    	// Check if the number entered by the user is a valid percentage grade
-    	// If valid, include it in the grade computation
-    	/*
-		if (depositAmount <= 0) {
-    		errorMessage.setText("Enter a deposit value above $0.00. ");
-    		depositAmount = 0;
-    	} 
-    	if (validDepositAmount = true && depositAmount > 0) {
-    		account.deposit(depositAmount);
-        	window.close();
-    	}	
-    	*/
-    		//System.out.println("before: " + account.getBalance());
-    		//account.deposit(depositAmount);
-    		//System.out.println("after: " + account.getBalance());	
-    	//System.out.print(depositAmount);
-    	System.out.print("TESTING HERE: " + account.getBalance());
-    	//account.deposit(depositAmount);
-    	//window.close();
-    	
-    }
+	}
+
+
 }
 	
 	
@@ -181,30 +154,12 @@ public class WithdrawWindow {
 	
 	
 	
-	/*
-	public void checkWithdraw() {
-		if (amount.getText().isEmpty()) {
-			errorMessage.setText("Please enter an amount to withdraw.");
-		} 
-		
-		double withdrawAmount = Double.parseDouble(amount.getText());
-		
-		//System.out.println("WWWWWWWW" + account.getBalance());
-		
-		
-		if (withdrawAmount > account.getBalance()){
-			errorMessage.setText("You cannot withdraw more than your balance. ");
-			
-		} else {
-			account.withdraw1(withdrawAmount);
-			window.close();
-		}
-		
-	}
-	*/
     
     	
 
-	
+
+
+
+
 
 
