@@ -87,6 +87,12 @@ public class Account {
 		accountType = anAccountType;
 	}
 	
+	Account(String aName, String anAccountType, double anAmount) {
+		name = aName;
+		accountType = anAccountType;
+		amount = anAmount;
+	}
+	
 	public void deposit(double amount) {
 		balance = balance + amount;
 	}

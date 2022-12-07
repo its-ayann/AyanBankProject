@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.collections.FXCollections?>
 
-<VBox prefHeight="456.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AccountDashboardController">
+<VBox prefHeight="624.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AccountDashboardController">
    <children>
       <VBox prefHeight="140.0" prefWidth="389.0">
          <children>
@@ -84,9 +84,9 @@
             </Button>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="376.0" prefWidth="524.0">
          <children>
-            <Button fx:id="historyButton" mnemonicParsing="false" onAction="#history" text="History">
+            <Button fx:id="historyButton" mnemonicParsing="false" onAction="#history" prefHeight="31.0" prefWidth="133.0" text="History">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
