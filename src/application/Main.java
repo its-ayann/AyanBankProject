@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+//Correct spelling for branch name
 
 public class Main extends Application {
 	@Override
