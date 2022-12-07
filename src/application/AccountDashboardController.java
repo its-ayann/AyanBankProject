@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +20,22 @@ import javafx.scene.text.Font;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 
 public class AccountDashboardController {
 	Stage applicationStage;
+	private Stage window;
+	
+	//private TableView<Transaction> table;
+	//private Transaction transaction;
+	
+	
 	
 	
 	FXMLLoader dashboard = new FXMLLoader();
@@ -48,6 +58,25 @@ public class AccountDashboardController {
     
     @FXML
     private Button selectAccountButton;
+    
+    @FXML
+    private TableView<Transaction> historyTableView;
+    
+    @FXML 
+    private TableColumn<Transaction, String> nameColumn;
+    @FXML 
+    private TableColumn<Transaction, String> accountTypeColumn;
+    @FXML 
+    private TableColumn<Transaction, String> typeColumn;
+    @FXML 
+    private TableColumn<Transaction, Double> amountColumn;
+    
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    	nameColumn.setCellValueFactory(new PropertyValueFactory<Transaction, String>("name"));
+    	accountTypeColumn.setCellValueFactory(new PropertyValueFactory<Transaction, String>("accountType"));
+    	typeColumn.setCellValueFactory(new PropertyValueFactory<Transaction, String>("type"));
+    	amountColumn.setCellValueFactory(new PropertyValueFactory<Transaction, Double>("amount"));
+    }
 
     //@FXML
    // private ChoiceBox<String> accountTypeChoiceBox;
@@ -75,6 +104,17 @@ public class AccountDashboardController {
    
     Account chequingAccount = new Account("Ayan Ahmed", 123, 300.00, "Chequing");
     Account savingAccount = new Account("John Doe", 84190, 800.00, "Saving");
+    double initialBalance;
+    double newAmount;
+    
+    private double initialChequingBalance;
+    private double initialSavingBalance;
+    
+    private double newChequingBalance;
+    private double newSavingBalance;
+    
+    private String previous;
+    private String previousAmount;
     
     public String getSelectAccountButtonLabel() {
     	if (selectAccountButton.getText() == null) {
@@ -159,6 +199,7 @@ public class AccountDashboardController {
     		if (saw.getSelectAccountComboBox().equals("CHEQUING ACCOUNT 012432")) {
         		System.out.println(saw.getSelectAccountComboBox());
         		//chequingSelected = true;
+        		initialBalance = account.getBalance();
         		account = chequingAccount;
         		nameLabel.setText(account.getName());
         		//accountTypeComboBox.setValue(Account.selectedAccount);
@@ -178,6 +219,7 @@ public class AccountDashboardController {
         		//balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
         	
         	} else if (saw.getSelectAccountComboBox().equals("SAVINGS ACCOUNT 84190")) {
+        		initialBalance = 800.00;
         		account = savingAccount;
         		nameLabel.setText(account.getName());
         		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
@@ -241,12 +283,16 @@ public class AccountDashboardController {
     void deposit(ActionEvent event) {
     	
     	if (selectAccountButton.getText().equals("CHEQUING ACCOUNT 012432")) {
+    		initialBalance = chequingAccount.getBalance();
     		 DepositWindow dw = new DepositWindow(chequingAccount);
     		 dw.displayDepositWindow();
+    		 newAmount = chequingAccount.getBalance();
     		balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
     	} else if (selectAccountButton.getText().equals("SAVINGS ACCOUNT 84190")){
+    		initialBalance = savingAccount.getBalance();
     		DepositWindow dw = new DepositWindow(savingAccount);
     		dw.displayDepositWindow();
+    		newAmount = savingAccount.getBalance();
     		balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
     	}
     	/*
@@ -392,10 +438,12 @@ public class AccountDashboardController {
 		if (selectAccountButton.getText().equals("CHEQUING ACCOUNT 012432")) {
 			WithdrawWindow ww = new WithdrawWindow(chequingAccount);
 			ww.displayWithdrawWindow();
+			newAmount = chequingAccount.getBalance();
 			balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
 	} else if (selectAccountButton.getText().equals("SAVINGS ACCOUNT 84190")){
 		WithdrawWindow ww = new WithdrawWindow(savingAccount);
 		ww.displayWithdrawWindow();
+		newAmount = savingAccount.getBalance();
 		balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
 	}
     	/*
@@ -416,12 +464,16 @@ public class AccountDashboardController {
     void transfer(ActionEvent event) {
     	System.out.println("transfer" + selectAccountButton.getText());
     	if (selectAccountButton.getText().equals("CHEQUING ACCOUNT 012432")) {
+    		initialChequingBalance = chequingAccount.getBalance();
     		//TransferWindow t = new TransferWindow(savingAccount,chequingAccount);
     		chequingToSaving.displayTransferWindow();
+    		newChequingBalance = chequingAccount.getBalance();
     		balanceLabel.setText("$" + String.valueOf(chequingAccount.getBalance()));
     	} else if (selectAccountButton.getText().equals("SAVINGS ACCOUNT 84190")){
+    		initialSavingBalance = savingAccount.getBalance();
     		//TransferWindow t = new TransferWindow(chequingAccount,savingAccount);
     		savingToChequing.displayTransferWindow();
+    		newSavingBalance = savingAccount.getBalance();
     		balanceLabel.setText("$" + String.valueOf(savingAccount.getBalance()));
     	}
     	//tw.displayTransferWindow();
@@ -431,9 +483,95 @@ public class AccountDashboardController {
     	System.out.println("saving: " + savingAccount.getBalance());
     }
 
+    DepositWindow dw = new DepositWindow();
+    HistoryWindow hw = new HistoryWindow(account.getName());
+    
+    
     @FXML
     void history(ActionEvent event) {
+    	//hw.getRecentName();
+    	//hw.displayHistoryWindow();
+    	//Hisotry wind = new Hisotry();
+    	//wind.showWindow();
+    	
+    	if (initialChequingBalance > newChequingBalance && initialSavingBalance < newSavingBalance) {
+    		hw.setRecentName(account.getName());
+    		hw.setRecentAccount(account.getAccountType());
+    		hw.setRecentType("Transfer to " + savingAccount.getAccountType());
+    		previous = "Transfer to " + savingAccount.getAccountType();
+        	double amount = initialChequingBalance - newChequingBalance;
+        	previousAmount = Double.toString(amount);
+        	hw.setRecentAmount(Double.toString(amount));
+        	//hw.displayHistoryWindow();
+    		
+    	}
+    	
+    	else if (initialChequingBalance < newChequingBalance && initialSavingBalance > newSavingBalance) {
+    		hw.setRecentName(account.getName());
+    		hw.setRecentAccount(account.getAccountType());
+    		hw.setRecentType("Transfer to " + chequingAccount.getAccountType());
+    		previous = "Transfer to " + chequingAccount.getAccountType();
+        	double amount = initialSavingBalance - newSavingBalance;
+        	previousAmount = Double.toString(amount);
+        	hw.setRecentAmount(Double.toString(amount));
+        	//hw.displayHistoryWindow();
+    		
+    	}
+    	
+    	else if (initialBalance < newAmount) {
+    		hw.setRecentName(account.getName());
+        	hw.setRecentAccount(account.getAccountType());
+        	hw.setRecentType("Deposit");
+        	previous = "Deposit";
+        	double amount = newAmount-initialBalance;
+        	previousAmount = Double.toString(amount);
+        	hw.setRecentAmount(Double.toString(amount));
+        	//hw.displayHistoryWindow();
+    	} 
+    	else if (initialBalance > newAmount) {
+    		hw.setRecentName(account.getName());
+        	hw.setRecentAccount(account.getAccountType());
+        	hw.setRecentType("Withdraw");
+        	previous = "Withdraw";
+        	double amount = initialBalance-newAmount;
+        	previousAmount = Double.toString(amount);
+        	hw.setRecentAmount(Double.toString(amount));
+        	//hw.displayHistoryWindow();
+    	}
+    	
+    	else {
+    		previousHistory();
+    		
+    	}
+    	
+    	
+    	
+    	/*
+    	if (chequingAccount.getBalance() < initialChequingBalance && savingAccount.getBalance() > initialSavingBalance) {
+    		hw.setRecentType("Transfer");
+    		System.out.print(hw.getRecentType());
+    	}
+    	*/
+    	/*
+    	System.out.println(selectAccountButton.getText());
+    	//acw.displayAccountHistory();
+    	//ah.displayAccountHistory();
+    	Transaction transaction = new Transaction(selectAccountButton.getText(),account.getAccountType(),"g",account.getAmount());
+    	ObservableList<Transaction> transactions = historyTableView.getItems();
+    	transactions.add(transaction);
+    	historyTableView.setItems(transactions);
+    	*/
+    	hw.displayHistoryWindow();
 
+    }
+    
+    void previousHistory() {
+    	hw.setRecentName(account.getName());
+    	hw.setRecentAccount(account.getAccountType());
+    	hw.setRecentType(previous);
+    	double amount = initialBalance-newAmount;
+    	previousAmount = Double.toString(amount);
+    	hw.setRecentAmount(Double.toString(amount));
     }
 
 }

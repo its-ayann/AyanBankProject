@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.collections.ObservableList;
 
 public class DepositWindow {
 	private Stage window;
@@ -21,7 +23,23 @@ public class DepositWindow {
 	private Label errorMessage;
 	private Account account;
 	
+	public Stage getWindow() {
+		return window;
+	}
 	
+	public void setWindow(Stage aWindow) {
+		window = aWindow;
+	}
+	
+	//AccountHistory ahw = new AccountHistory();
+	//private TableView<Account> table = new TableView<Account>();
+	//private TableView<Transaction> table = new TableView<Transaction>();
+	
+	
+	
+	DepositWindow() {
+		
+	}
 	
 	DepositWindow(Account anAccount) {
 		account = anAccount;
@@ -100,7 +118,7 @@ public class DepositWindow {
     	
     	
     	if (depositAmountText.isEmpty()) {
-    		errorMessage.setText("sPlease enter an amount to deposit");
+    		errorMessage.setText("Please enter an amount to deposit");
     	}
     	
     	
@@ -159,6 +177,10 @@ public class DepositWindow {
 		boolean validNumericInput = true;
 		int decimalCounter = 0;
 		
+		if (amount.getText().isEmpty()) {
+			validNumericInput = false;
+			errorMessage.setText("Please enter a amount in the text field to deposit.");
+		}
 		for (char c: amount.getText().toCharArray()) {
     		
     		// Check if the character is a digit
@@ -189,13 +211,48 @@ public class DepositWindow {
 	    	} 
 	    	else if (validDepositAmount = true && depositAmount > 0) {
 	    		account.deposit(depositAmount);
-	        	window.close();
+	    		window.close();
+	    		//ahw.addInfoToTable(account.getName(), account.getAccountType(), depositAmount);
+	    		//System.out.println(account.getName());
+	    		//System.out.println(account.getAccountType());
+	    		
+	    		//Account t = new Account(account.getName(), account.getAccountType(), depositAmount);
+	    		Transaction t = new Transaction("Ayan", "chequing", "deposit", depositAmount);
+	    		//AccountHistoryWindow a = new AccountHistoryWindow(t);
+	    		//a.displayAccountHistory();
+	    		//AccountHistory ah = new AccountHistory(table, t);
+	    		//ah.displayAccountHistory();
+	    		//table.getItems().add(t);
+	    		//ah.addToTable(table, t);
+	    		//ahw.displayAccountHistory(table);
+	    		
+	    		//ObservableList<Transaction> list = table.getItems();
+	    		//list.add(t);
+	    		//table.setItems(list);
+	    		
+	    		System.out.print("set name label to: " + account.getName());
+	    		//HistoryWindow hw = new HistoryWindow();
+	    		//hw.recentName.setText(account.getName() + "S");
+	    		//hw.getRecentName().setText("A");
+	    		//hw.updateText(account.getName());
+	    		
+	    		
+	    		//HistoryWindow hw = new HistoryWindow(account.getName());
+	    		//System.out.println(hw.getRecentName());
+	    		//hw.setRecentName(account.getName());
+	    		//System.out.println(hw.getRecentName());
+	    		//hw.displayHistoryWindow();
+	    		
+	    		//ahw.getA().add(t);
+	    		//ahw.getTable().getItems().add(new Account(account.getName(), account.getAccountType(), depositAmount));
 	    	}	
 		}
 		
 		
     	
     }
+	
+	
 }
 	
 	
