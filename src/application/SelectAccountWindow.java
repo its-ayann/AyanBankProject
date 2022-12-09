@@ -68,7 +68,7 @@ public class SelectAccountWindow {
 		HBox.setMargin(message, new Insets(10, 10, 10, 10));
 		
 		String accounts[] = {"CHEQUING ACCOUNT 012432", "SAVINGS ACCOUNT 84190"};
-		selectAccountComboBox = new ComboBox(FXCollections.observableArrayList(accounts));
+		selectAccountComboBox = new ComboBox(FXCollections.observableArrayList(accounts)); //to fill a combox with choices I used StackedOverflow: https://stackoverflow.com/questions/23067256/populate-choicebox-defined-in-fxml
 		//selectAccountComboBox.setPadding(new Insets(10,10,10,10));
 		selectAccountComboBox.setPrefSize(330,20);
 		//selectAccountComboBox.getItems().addAll("CHEQUING ACCOUNT 012432", "SAVINGS ACCOUNT 84190");
