@@ -153,7 +153,7 @@ public class DepositWindow {
 	    	else if (validDepositAmount = true && depositAmount > 0) {
 	    		account.deposit(depositAmount);
 	    		window.close();
-	    		System.out.print("set name label to: " + account.getName());
+	    		//System.out.print("set name label to: " + account.getName());
 	    		
 	    	}	
 		}
