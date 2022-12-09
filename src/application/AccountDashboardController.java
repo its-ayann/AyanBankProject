@@ -122,14 +122,14 @@ public class AccountDashboardController {
     	if (saw.getSelectAccountComboBox() != null) {
     		selectAccountButton.setText(saw.getSelectAccountComboBox());
     		if (saw.getSelectAccountComboBox().equals("CHEQUING ACCOUNT 012432")) {
-        		System.out.println(saw.getSelectAccountComboBox());
+        		//System.out.println(saw.getSelectAccountComboBox());
         	
         		initialBalance = account.getBalance();
         		account = chequingAccount;
         		nameLabel.setText(account.getName());
         		
         		balanceLabel.setText("$" + String.valueOf(account.getBalance()));
-        		System.out.println("is it working: " + account.getBalance());
+        		//System.out.println("is it working: " + account.getBalance());
         		
         	
         	} else if (saw.getSelectAccountComboBox().equals("SAVINGS ACCOUNT 84190")) {
@@ -169,8 +169,8 @@ public class AccountDashboardController {
     		balanceLabel.setText(String.format("$ %.2f", savingAccount.getBalance()));
     	}
     	
-	System.out.println("chequing: " + chequingAccount.getBalance());
-	System.out.println("dispalyed: " + account.getBalance());
+	//System.out.println("chequing: " + chequingAccount.getBalance());
+	//System.out.println("dispalyed: " + account.getBalance());
     }
     
     
@@ -216,7 +216,7 @@ public class AccountDashboardController {
     
     @FXML
     void transfer(ActionEvent event) {
-    	System.out.println("transfer" + selectAccountButton.getText());
+    	//System.out.println("transfer" + selectAccountButton.getText());
     	if (selectAccountButton.getText().equals("CHEQUING ACCOUNT 012432")) {
     		initialChequingBalance = chequingAccount.getBalance();
     		initialSavingBalance = savingAccount.getBalance();
@@ -235,8 +235,8 @@ public class AccountDashboardController {
     		balanceLabel.setText(String.format("$ %.2f", savingAccount.getBalance()));
     	}
     	
-    	System.out.println("chequing: " + chequingAccount.getBalance());
-    	System.out.println("saving: " + savingAccount.getBalance());
+    	//System.out.println("chequing: " + chequingAccount.getBalance());
+    	//System.out.println("saving: " + savingAccount.getBalance());
     }
 
     
@@ -255,10 +255,10 @@ public class AccountDashboardController {
     @FXML
     void history(ActionEvent event) {
     	
-    	System.out.println(initialChequingBalance);
-    	System.out.println(newChequingBalance);
-    	System.out.println(initialSavingBalance);
-    	System.out.println(newSavingBalance);
+    	//System.out.println(initialChequingBalance);
+    	//System.out.println(newChequingBalance);
+    	//System.out.println(initialSavingBalance);
+    	//System.out.println(newSavingBalance);
     	
     	// Transfer from chequing account to saving account
     	if (initialChequingBalance > newChequingBalance && initialSavingBalance < newSavingBalance) {
@@ -296,15 +296,11 @@ public class AccountDashboardController {
         	hw.setRecentType("Deposit");
         	previous = "Deposit";
         	double amount = newAmount-initialBalance;
-        	
-        	System.out.println(newAmount);
-        	System.out.println(initialBalance);
-        	
+        	//System.out.println(newAmount);
+        	//System.out.println(initialBalance);
         	previousAmount = Double.toString(amount);
-        	
-        	//hw.setRecentAmount(Double.toString(amount));
         	hw.setRecentAmount(String.format("$ %.2f", amount));
-        	//hw.displayHistoryWindow();
+        	
     	} 
     	//withdraw
     	else if (initialBalance > newAmount) {
@@ -313,11 +309,9 @@ public class AccountDashboardController {
         	hw.setRecentType("Withdraw");
         	previous = "Withdraw";
         	double amount = initialBalance-newAmount;
-        	System.out.println(difference);
+        	//System.out.println(difference);
         	previousAmount = Double.toString(amount);
         	hw.setRecentAmount(String.format("$ %.2f", amount));
-        	//hw.setRecentAmount(Double.toString(amount));
-        	//hw.displayHistoryWindow();
     	}
     	else {
     		previousHistory();

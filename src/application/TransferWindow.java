@@ -100,6 +100,7 @@ public class TransferWindow {
 		
 		
 		transfer.setOnAction(transferEvent -> checkTransfer());
+		cancel.setOnAction(cancleEvent -> window.close());
 		
 		title.getChildren().addAll(transferTitle);
 		contents.getChildren().addAll(accountToComboBox,amount);
