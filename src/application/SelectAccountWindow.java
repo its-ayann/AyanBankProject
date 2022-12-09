@@ -114,7 +114,7 @@ public class SelectAccountWindow {
 	 * account is selected a message will be displayed.
 	 */
 	public void checkInput() {
-		if (selectAccountComboBox.getSelectionModel().getSelectedItem() == null) {
+		if (selectAccountComboBox.getSelectionModel().getSelectedItem() == null) { //to find the selected choice in combobox I used StackOverflow: https://stackoverflow.com/questions/32329547/return-the-choice-of-a-combobox-javafx
 			errorMessage.setText("Please enter an account to continue.");
 			
 		} else {
