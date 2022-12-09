@@ -36,7 +36,7 @@ public class SelectAccountWindow {
 	
 	public String getSelectAccountComboBox() {
 		if (selectAccountComboBox.getSelectionModel().getSelectedItem() != null) {
-			return selectAccountComboBox.getSelectionModel().getSelectedItem().toString();
+			return selectAccountComboBox.getSelectionModel().getSelectedItem().toString(); //to find the selected choice in combobox I used StackOverflow: https://stackoverflow.com/questions/32329547/return-the-choice-of-a-combobox-javafx
 		}
 		else {
 			return null;
