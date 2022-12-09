@@ -108,12 +108,12 @@ public void displayHistoryWindow() {
     	Label type = new Label(" Type ");
     	type.setFont(Font.font("Arial",FontWeight.BOLD, 12));
     	type.setUnderline(true);
-    	type.setPadding(new Insets(0,50,50,0));
+    	type.setPadding(new Insets(0,50,0,0));
     	
     	Label amount = new Label(" Amount");
 		amount.setFont(Font.font("Arial",FontWeight.BOLD,12));
 		amount.setUnderline(true);
-		amount.setPadding(new Insets(0,0,0,50));
+		amount.setPadding(new Insets(0,50,0,0));
     	
     	headers.setAlignment(Pos.TOP_CENTER);
     	HBox.setMargin(headers, new Insets(10, 10, 10, 10));
@@ -122,37 +122,27 @@ public void displayHistoryWindow() {
     	
     	HBox recentHistory = new HBox();
     	
-    	//Label recentName = new Label(" ");
-    	
-    	System.out.println(recentName.getText() + "s");
-    	
-    	//recentName.setText(recentName.getText());
     	recentName.setFont(Font.font("Arial", 12));
-    	name.setPadding(new Insets(0,50,0,0));
-    	//recentName.setFont(Font.font("Franklin Gothic Medium", 15));
+    	recentName.setPadding(new Insets(0,0,0,50));
     	
-    	//Label recentAccount = new Label(" ");
-    	recentName.setFont(Font.font("Arial", 12));
-    	name.setPadding(new Insets(0,50,50,0));
-    	//recentAccount.setFont(Font.font("Franklin Gothic Medium", 30));
+    	recentAccount.setFont(Font.font("Arial", 9));
+    	recentAccount.setPadding(new Insets(0,0,0,50));
+
+    	recentType.setFont(Font.font("Arial", 12));
+    	recentType.setPadding(new Insets(0,0,0,50));
     	
-    	//Label recentType = new Label(" ");
-    	recentName.setFont(Font.font("Arial", 12));
-    	name.setPadding(new Insets(0,50,50,0));
-    	//recentType.setFont(Font.font("Franklin Gothic Medium", 30));
+    	recentAmount.setFont(Font.font("Arial", 12));
+    	recentAmount.setPadding(new Insets(0,0,0,50));
     	
-    	//Label recentAmount = new Label(" ");
-    	recentName.setFont(Font.font("Arial", 12));
-    	name.setPadding(new Insets(0,0,0,50));
-    	//recentAmount.setFont(Font.font("Franklin Gothic Medium", 30));
-    	
+    	recentHistory.setAlignment(Pos.TOP_CENTER);
 		HBox.setMargin(recentHistory, new Insets(10, 10, 10, 10));
     	
     	
     	HBox buttons = new HBox();
     	Button cancel = new Button("Back");
     	buttons.setAlignment(Pos.CENTER_RIGHT);
-    	HBox.setMargin(cancel, new Insets(10, 10, 10, 10));
+    	
+    	HBox.setMargin(buttons, new Insets(10, 10, 10, 10));
     	
     	cancel.setOnAction(cancelEvent -> window.close());
     	
@@ -178,3 +168,54 @@ public void displayHistoryWindow() {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

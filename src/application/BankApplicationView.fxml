@@ -91,9 +91,12 @@
             </CheckBox>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label text="Label" />
+            <Label fx:id="errorMessage" textFill="RED">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="15.0" />
+               </font></Label>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

@@ -25,7 +25,7 @@ public class BankApplicationLoginController {
 	
 	private Stage primaryStage;
 	private Scene myScene;
-	private ForgotPasswordController nextSceneController;
+	//private ForgotPasswordController nextSceneController;
 	
 	public void setPrimaryStage(Stage aStage) {
 		primaryStage = aStage;
@@ -60,6 +60,18 @@ public class BankApplicationLoginController {
     @FXML
     private Button signInButton;
     
+    @FXML
+    private Label errorMessage;
+    
+    private String password = "abc";
+    
+    public String getPassword() {
+    	return password;
+    }
+    
+    public void setPassword(String newPassword) {
+    	password = newPassword;
+    }
   
     
     @FXML
@@ -80,16 +92,26 @@ public class BankApplicationLoginController {
     @FXML
     void forgotPassword(ActionEvent event) {
     	
+    	ChangePasswordView cpv = new ChangePasswordView(password);
+    	cpv.displayChangePasswordWindow();
     	
+    	password = cpv.getNewPassword();
+   
+    	
+    	/*
     	try {
-			FXMLLoader forgotPasswordLoader = new FXMLLoader();
-			
+    		
+    		FXMLLoader forgotPasswordLoader = new FXMLLoader();
+			Parent root = FXMLLoader.load(getClass().getResource("ChangePasswordView.fxml"));
 			//VBox root = forgotPasswordLoader.load(new FileInputStream("src/application/ForgotPasswordView.fxml"));
-			
-			Parent root = forgotPasswordLoader.load(new FileInputStream("src/application/ForgotPasswordView.fxml"));
-			
 			Stage window = (Stage) forgotPasswordHyperLink.getScene().getWindow();
-			window.setScene(new Scene(root,600,400));
+			window.setScene(new Scene(root, 600, 400));
+			
+			
+			//Parent root = forgotPasswordLoader.load(new FileInputStream("src/application/ChangePasswordView.fxml"));
+			
+			//Stage window = (Stage) forgotPasswordHyperLink.getScene().getWindow();
+			//window.setScene(new Scene(root,600,400));
 			
 			//Scene forgotPassword = new Scene(root, 600,400);
     		
@@ -107,8 +129,7 @@ public class BankApplicationLoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	//nextSceneController.takeFocus();
-    
+		*/
 
     }
     
@@ -117,8 +138,8 @@ public class BankApplicationLoginController {
     @FXML
     void signIn(ActionEvent event) {
     	String accountNumber = accountNumberTextField.getText();
-    	String password = passwordTextField.getText();
-    	if (accountNumber.equals("12-3") && password.equals("abc")) {
+    	String passwordGuessed = passwordTextField.getText();
+    	if (accountNumber.equals("12-3") && passwordGuessed.equals(password)) {
     		System.out.println("Logged in successfully");
     		
     		
@@ -152,6 +173,7 @@ public class BankApplicationLoginController {
     		
     		
     	} else {
+    		errorMessage.setText("Your Account Number or Password is incorrect. Try again.");
     		System.out.println("one or more of your info was wrong");
     	}
     	System.out.println("Account Number: " + accountNumber);

@@ -10,7 +10,6 @@ public class Account {
 	private String accountFrom;
 	private double amount;
 	
-	public static String selectedAccount;
 	
 	public String getName() {
 		return name;
