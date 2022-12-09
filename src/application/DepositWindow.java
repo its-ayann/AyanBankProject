@@ -30,14 +30,7 @@ public class DepositWindow {
 	private Label errorMessage;
 	private Account account;
 	
-	public Stage getWindow() {
-		return window;
-	}
-	
-	public void setWindow(Stage aWindow) {
-		window = aWindow;
-	}
-	
+
 	
 	DepositWindow() {
 		
