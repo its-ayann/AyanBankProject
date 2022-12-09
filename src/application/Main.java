@@ -10,8 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * The main file that executes the log in window. 
+ * @author Ayan Ahmed
+ *
+ */
 public class Main extends Application {
+	
+	/** Displays the scene on the primary stage. 
+	 * @param asks for which scene to be displayed to thee user.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {

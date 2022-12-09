@@ -15,6 +15,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * When the user clicks on the transfer button then this window will appear. 
+ * The option to select to which account to transfer to is displayed as well
+ * as a text field to write the amount to transfer. 
+ * @author Ayan Ahmed
+ *
+ */
 public class TransferWindow {
 	private Stage window;
 	
@@ -39,9 +46,14 @@ public class TransferWindow {
 		accountFrom = anAccountFrom;
 	}
 	
+	/**
+	 * This method displays the transfer window. This window was made with JavaFX.
+	 * //Change font in JavaFX found from StackOverflow: https://stackoverflow.com/questions/32624748/javafx-change-font-and-size-in-a-textfield 
+	 * code to change font: (Font.font("Franklin Gothic Medium", 30))
+	 */
 	public void displayTransferWindow() {
 		window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
+		window.initModality(Modality.APPLICATION_MODAL); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 		window.setTitle("Transfer Window");
 		window.setMinHeight(300);
 		window.setMinWidth(500);
@@ -62,9 +74,9 @@ public class TransferWindow {
 		accountToComboBox.maxHeight(31);
 		accountToComboBox.maxWidth(330);
 		//System.out.println("1" + account.getAccountType());
-		if (accountFrom.getAccountType().equals("Chequing")) {
+		if (accountFrom.getAccountType().equals("CHEQUING ACCOUNT 012432")) {
 			accountToComboBox = new ComboBox(FXCollections.observableArrayList(savingAccount));
-		} else if (accountFrom.getAccountType().equals("Saving")) {
+		} else if (accountFrom.getAccountType().equals("SAVINGS ACCOUNT 84190")) {
 			accountToComboBox = new ComboBox(FXCollections.observableArrayList(chequingAccount));
 		}
 		
@@ -98,11 +110,15 @@ public class TransferWindow {
 		
 		Scene scene = new Scene(transferContainer);
     	window.setScene(scene);
-    	window.showAndWait();
+    	window.showAndWait(); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 		
 	}
 	
-public void checkTransfer() {
+	/**
+	 * This method is used to validate the user input for the amount 
+	 * to transfer in the text field.
+	 */
+	public void checkTransfer() {
 		
 		String transferAmountText = amount.getText();
 		boolean validNumericInput = true;
@@ -113,7 +129,7 @@ public void checkTransfer() {
 		} 
 		for (char c: amount.getText().toCharArray()) {
     		
-    		// Check if the character is a digit
+    		// Check if the character entered for transfer amount is a digit. Allow only one decimal.
     		if (!Character.isDigit(c)) {
     			if (c!= '.') {
     				validNumericInput = false;
@@ -133,8 +149,8 @@ public void checkTransfer() {
 			
 		
 	    	
-	    	// Check if the number entered by the user is a valid percentage grade
-	    	// If valid, include it in the grade computation
+	    	// Check if the number entered by the user is a transfer amount (greater than zero and at most equal to account balance)
+	    	// If valid, transfer amount
 	    	if (transferAmount <= 0) {
 	    		validTransferAmount = false;
 	    		errorMessage.setText("Enter an amount to transfer above $0.00. ");
@@ -148,94 +164,13 @@ public void checkTransfer() {
 	    	}
 	    	else if (validTransferAmount = true) {
 	    		accountTo.deposit(transferAmount);
-				accountFrom.withdraw1(transferAmount);
+				accountFrom.withdraw(transferAmount);
 	        	window.close();
 	    	}	
 		}
 		
-		//double depositAmount =  0;
-		
-		//double depositAmount = Double.parseDouble(depositAmountText);
-	
-		/*
-    	if (validDepositAmount) {
-    		depositAmount = Double.parseDouble(depositAmountText);
-    	}
-    	*/
-    	//System.out.println(getChequingSelected());
-    	
-    	// Check if the number entered by the user is a valid percentage grade
-    	// If valid, include it in the grade computation
-    	/*
-		if (depositAmount <= 0) {
-    		errorMessage.setText("Enter a deposit value above $0.00. ");
-    		depositAmount = 0;
-    	} 
-    	if (validDepositAmount = true && depositAmount > 0) {
-    		account.deposit(depositAmount);
-        	window.close();
-    	}	
-    	*/
-    		//System.out.println("before: " + account.getBalance());
-    		//account.deposit(depositAmount);
-    		//System.out.println("after: " + account.getBalance());	
-    	//System.out.print(depositAmount);
-    	//System.out.print("TESTING HERE: " + account.getBalance());
-    	//account.deposit(depositAmount);
-    	//window.close();
     	
     }
 
-	
-	
-	
-	
-	/*
-	public void checkTransfer() {
-		//System.out.println(account.getAccountNumber());
-		System.out.println(accountToComboBox.getSelectionModel().getSelectedItem().toString());
-		
-		if (amount.getText().isEmpty()) {
-			errorMessage.setText("Please enter an amount to transfer.");
-		} 
-		
-		
-		//Account accountFrom = new Account(account.getAccountFrom(), account.getBalance());
-		//Account accountToTransfer = new Account();
-		
-		//String accountTransferTo = accountToComboBox.getSelectionModel().getSelectedItem().toString();
-		
-		//if (accountTransferTo.equals("SAVINGS ACCOUNT 84190")) {
-		
-			//accountToTransfer = new Account(accountTransferTo);
-			//accountToTransfer.setBalance(500);
-			//double accountToBalance = accountToTransfer.getBalance();
-			//accountTo = new Account(accountToComboBox.getSelectionModel().getSelectedItem().toString(), accountToBalance);
-		//}
-		double transferAmount = Double.parseDouble(amount.getText());
-		
-		//System.out.println("WWWWWWWW" + account.getBalance());
-		
-		
-		if (transferAmount > accountFrom.getBalance()){
-			errorMessage.setText("You cannot transfer more than your balance. ");
-			
-		} else {
-			accountTo.deposit(transferAmount);
-			accountFrom.withdraw1(transferAmount);
-			/*
-			if (account.getAccountNumber() == 123) {
-				//account.getAccountNumber(accountToComboBox.getSelectionModel().getSelectedItem());
-				account.transferTo(accountToTransfer,  account, transferAmount);
-			}
-			account.getAccountNumber();
-			//account.withdraw1(transferAmount);
-			*/
-			//window.close();
-		//}
-		
-	//}
-	
-	
 
 }

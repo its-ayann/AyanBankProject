@@ -1,5 +1,11 @@
 package application;
 
+/**
+ * The parts that make up of an Account.
+ * @author Ayan Ahmed
+ *
+ */
+
 public class Account {
 	
 	private String name;
@@ -92,18 +98,23 @@ public class Account {
 		amount = anAmount;
 	}
 	
+	
+	/**
+	 * Add money to an account when the user chooses to deposit.
+	 * @param amount the amount the user inputs to deposit will add to the current balance.
+	 */
 	public void deposit(double amount) {
 		balance = balance + amount;
 	}
 	
-	public void withdraw1(double amount) {
+	/**
+	 * Subtract money to an account when the user chooses to withdraw.
+	 * @param amount the amount the user inputs to withdraw will subtract to the current balance.
+	 */
+	public void withdraw(double amount) {
 		balance = balance - amount;
 	}
 	
-	public void transferTo(Account accountTo, Account accountFrom, double amount) {
-		accountTo.deposit(amount);
-		accountFrom.withdraw1(amount);
-	}
 	
 	
 

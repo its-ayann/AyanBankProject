@@ -13,6 +13,14 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
+/**
+ * When user clicks on the forgot password
+ * hyperlink display this window which will allow the user 
+ * to change their password or go back to the main log in page
+ * @author Ayan Ahmed
+ *
+ */
 public class ChangePasswordView {
 	Stage window;
 	
@@ -34,10 +42,17 @@ public class ChangePasswordView {
 		return newPassword;
 	}
 	
+	
+	/**
+	 * The change password window that is made from JavaFX. When the user 
+	 * selects the save button a method will run to verify the new password. 
+	 * //Change font in JavaFX found from StackOverflow: https://stackoverflow.com/questions/32624748/javafx-change-font-and-size-in-a-textfield 
+	 * code to change font: (Font.font("Franklin Gothic Medium", 30))
+	 */
 	public void displayChangePasswordWindow() {
 		
 		window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
+		window.initModality(Modality.APPLICATION_MODAL); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 		window.setTitle("Change Password Window");
 		window.setMinHeight(300);
 		window.setMinWidth(500);
@@ -48,7 +63,7 @@ public class ChangePasswordView {
     	VBox contents = new VBox();
     	
     	Label title = new Label("Change Password");
-    	title.setFont(Font.font("Franklin Gothic Medium", 30));
+    	title.setFont(Font.font("Franklin Gothic Medium", 30)); 
     	title.setAlignment(Pos.TOP_LEFT);
     	
     	Label newPassword = new Label("New Password");
@@ -58,7 +73,6 @@ public class ChangePasswordView {
     	confirmNewPasswordTextField = new TextField();
     	
     	errorMessage = new Label("");
-		//errorMessage.setPadding(new Insets(10,10,10,10));
 		errorMessage.setFont(Font.font("Franklin Gothic Medium", 12));
 		errorMessage.setTextFill(Color.color(1, 0, 0));
     	
@@ -70,29 +84,30 @@ public class ChangePasswordView {
     	save.setFont(Font.font("System", 15));
     	
     	Button cancel = new Button("Cancel");
-    	save.setFont(Font.font("Franklin Gothic Medium", 15));//dollarSign.setPadding(new Insets(10,0,10,10));
+    	save.setFont(Font.font("Franklin Gothic Medium", 15));
     	
     	HBox.setMargin(buttons, new Insets(10, 10, 10, 10));
     	
-    	
-    	
-    	
+   
     	save.setOnAction(saveEvent -> changePassword());
-    	//deposit.setOnAction(depositEvent -> validDepo(getDepositAmount(amount.getText())));
-    	
     	cancel.setOnAction(cancelEvent -> window.close());
     	
     	
     	contents.getChildren().addAll(title,newPassword,newPasswordTextField,confirmPassword,confirmNewPasswordTextField, errorMessage);
     	buttons.getChildren().addAll(save, cancel);
-    	
     	passwordContainer.getChildren().addAll(contents,buttons);
     	
     	Scene scene = new Scene(passwordContainer);
     	window.setScene(scene);
-    	window.showAndWait();
+    	window.showAndWait(); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 	}
 
+	/**
+	 * method that will validate the user input from the text field through 3 ways. 
+	 * 1. make sure the user entered something in both text fields and not left blank 
+	 * 2. make sure both rext fields match each other to confirm the input incase there was a typo
+	 * 3. make sure the new password doesn't match the current password
+	 */
 	public void changePassword() {
 		System.out.println(bac.getPassword());
     	if (newPasswordTextField.getText().isEmpty() || confirmNewPasswordTextField.getText().isEmpty()) {

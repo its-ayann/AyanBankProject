@@ -14,14 +14,24 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
+/**
+ * When user clicks on the history button
+ * display this window which will allow the user 
+ * view the most recent transaction including 
+ * the name under the account, the account type, the type 
+ * of transaction and the amount.
+ * @author Ayan Ahmed
+ *
+ */
 public class HistoryWindow {
 	private Stage window;
 	
 	
-	Label recentName = new Label("old");
-	Label recentAccount = new Label(" ");
-	Label recentType = new Label("test ");
-	Label recentAmount = new Label(" ");
+	Label recentName = new Label("");
+	Label recentAccount = new Label("");
+	Label recentType = new Label("");
+	Label recentAmount = new Label("");
 	
 
 	
@@ -73,11 +83,14 @@ public class HistoryWindow {
 		recentName.setText(aRecentName);
 	}
 	
-public void displayHistoryWindow() {
+	/**
+	 * The history window displayed when the user clicks the history button
+	 * on the account dashboard window. The window was made with JavaFX. 
+	 */
+	public void displayHistoryWindow() {
 		
 	
 		window = new Stage();
-		//window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("History Window");
 		window.setMinHeight(300);
 		window.setMinWidth(500);
@@ -161,11 +174,6 @@ public void displayHistoryWindow() {
     	
 	}
 
-
-
-	public void updateName(String t) {
-		recentName.setText(t);
-	}
 
 }
 

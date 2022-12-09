@@ -20,6 +20,13 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * When the user clicks on the button select account
+ * from the account dashboard this window will pop-up.
+ * It will ask to choose account from the options given.
+ * @author Ayan Ahmed
+ *
+ */
 public class SelectAccountWindow {
 	
 	private Stage window;
@@ -36,10 +43,16 @@ public class SelectAccountWindow {
 		}
 	}
 	
+	/**
+	 * When the user clicks on the button from the account dashboard to select an account
+	 * this method will display the window. The window was made with JavaFX.
+	 * //Change font in JavaFX found from StackOverflow: https://stackoverflow.com/questions/32624748/javafx-change-font-and-size-in-a-textfield 
+	 * code to change font: (Font.font("Franklin Gothic Medium", 30))
+	 */
 	public void selectAccountDisplay() {
 		
 		window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
+		window.initModality(Modality.APPLICATION_MODAL); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 		window.setTitle("Select Account");
 		window.setMinHeight(300);
 		window.setMinWidth(500);
@@ -92,11 +105,14 @@ public class SelectAccountWindow {
 		
 		Scene scene = new Scene(main);
 		window.setScene(scene);
-		window.showAndWait();
+		window.showAndWait(); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 	}
 	
 	
-	
+	/**
+	 * This method will make sure that the user selects an account from the window. If no 
+	 * account is selected a message will be displayed.
+	 */
 	public void checkInput() {
 		if (selectAccountComboBox.getSelectionModel().getSelectedItem() == null) {
 			errorMessage.setText("Please enter an account to continue.");

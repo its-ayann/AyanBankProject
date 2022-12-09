@@ -16,6 +16,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 
+/**
+ * When user clicks on the deposit button from the dash board window
+ * display this window which will prompt the user with the amount 
+ * the user wants to deposit. Has the option to exit the window.
+ * @author Ayan Ahmed
+ *
+ */
 public class DepositWindow {
 	private Stage window;
 	
@@ -31,11 +38,6 @@ public class DepositWindow {
 		window = aWindow;
 	}
 	
-	//AccountHistory ahw = new AccountHistory();
-	//private TableView<Account> table = new TableView<Account>();
-	//private TableView<Transaction> table = new TableView<Transaction>();
-	
-	
 	
 	DepositWindow() {
 		
@@ -45,10 +47,17 @@ public class DepositWindow {
 		account = anAccount;
 	}
 	
+	/**
+	 * method that displays the deposit window built through JavaFX.
+	 * When the user clicks on the deposit button on this page, 
+	 * the value entered in the text field is checked if valid.
+	 * //Change font in JavaFX found from StackOverflow: https://stackoverflow.com/questions/32624748/javafx-change-font-and-size-in-a-textfield 
+	 * code to change font: (Font.font("Franklin Gothic Medium", 30))
+	 */
 	public void displayDepositWindow() {
 		
 		window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
+		window.initModality(Modality.APPLICATION_MODAL); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 		window.setTitle("Deposit Window");
 		window.setMinHeight(300);
 		window.setMinWidth(500);
@@ -92,11 +101,8 @@ public class DepositWindow {
     	
     	
     	deposit.setOnAction(depositEvent -> checkDeposit());
-    	//deposit.setOnAction(depositEvent -> validDepo(getDepositAmount(amount.getText())));
-    	
     	cancel.setOnAction(cancelEvent -> window.close());
-    	
-    	
+
     	title.getChildren().addAll(depositTitle);
     	money.getChildren().addAll(dollarSign, amount);
     	message.getChildren().addAll(errorMessage);
@@ -106,71 +112,13 @@ public class DepositWindow {
     	
     	Scene scene = new Scene(depositContainer);
     	window.setScene(scene);
-    	window.showAndWait();
+    	window.showAndWait(); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 	}
     
-	
-	
-	public double getDepositAmount(String depositAmountText) {
-		boolean validDepositAmount = true;
-    	int decimalCounter = 0;
-    	depositAmountText = amount.getText();
-    	
-    	
-    	if (depositAmountText.isEmpty()) {
-    		errorMessage.setText("Please enter an amount to deposit");
-    	}
-    	
-    	
-    	for (char c: depositAmountText.toCharArray()) {
-    		
-    		// Check if the character is a digit
-    		//System.out.println(c);
-    		if (!Character.isDigit(c)) {
-    			if (c!= '.') {
-    				validDepositAmount = false;
-        			errorMessage.setText("Do not use " + c + " in a deposit amount. Make sure to enter a number.");
-    			} else if (decimalCounter != 0) {
-    				validDepositAmount = false;
-    				errorMessage.setText("Do not use more than one decimal. Please enter a valid number");
-    			} else if (c == '.') {
-    				decimalCounter = decimalCounter + 1;
-    			}
-    		}
-}
-    	
-    	double depositAmount =  0;
-    	if (validDepositAmount) {
-    		depositAmount = Double.parseDouble(depositAmountText);
-    	}
-    	
-    	//System.out.println(getChequingSelected());
-    	
-    	// Check if the number entered by the user is a valid percentage grade
-    	// If valid, include it in the grade computation
-    	if (depositAmount <= 0) {
-    		errorMessage.setText("Enter a deposit value above $0.00. ");
-    		depositAmount = 0;
-    	} 
-    		
-    		//System.out.println("before: " + account.getBalance());
-    		//account.deposit(depositAmount);
-    		//System.out.println("after: " + account.getBalance());	
-    	System.out.print(validDepositAmount);
-    	return depositAmount;
-    }
-		
-	
-	public void validDepo(double depositAmount) {
-		if (depositAmount <= 0){
-			errorMessage.setText("PLease enter a valid amount to deposit");
-			
-		} else {
-			account.deposit(depositAmount);
-			window.close();
-		}
-	}
-	
+	/**
+	 * Check if value entered in deposit text field is a valid number. Shows 
+	 * a error message for the respective error in the text field. 
+	 */
 	public void checkDeposit() {
 		String depositAmountText = amount.getText();
 		
@@ -183,7 +131,7 @@ public class DepositWindow {
 		}
 		for (char c: amount.getText().toCharArray()) {
     		
-    		// Check if the character is a digit
+    		// Check if the character entered for input is a digit. Allow only one decimal
     		if (!Character.isDigit(c)) {
     			if (c!= '.') {
     				validNumericInput = false;
@@ -202,8 +150,8 @@ public class DepositWindow {
 			double depositAmount = Double.parseDouble(depositAmountText);
 			
 	    	
-	    	// Check if the number entered by the user is a valid percentage grade
-	    	// If valid, include it in the grade computation
+	    	// Check if the number entered by the user is a greater than zero (valid deposit amount)
+	    	// If valid, deposit amount
 	    	if (depositAmount <= 0) {
 	    		validDepositAmount = false;
 	    		errorMessage.setText("Enter a deposit value above $0.00. ");
@@ -212,43 +160,10 @@ public class DepositWindow {
 	    	else if (validDepositAmount = true && depositAmount > 0) {
 	    		account.deposit(depositAmount);
 	    		window.close();
-	    		//ahw.addInfoToTable(account.getName(), account.getAccountType(), depositAmount);
-	    		//System.out.println(account.getName());
-	    		//System.out.println(account.getAccountType());
-	    		
-	    		//Account t = new Account(account.getName(), account.getAccountType(), depositAmount);
-	    		Transaction t = new Transaction("Ayan", "chequing", "deposit", depositAmount);
-	    		//AccountHistoryWindow a = new AccountHistoryWindow(t);
-	    		//a.displayAccountHistory();
-	    		//AccountHistory ah = new AccountHistory(table, t);
-	    		//ah.displayAccountHistory();
-	    		//table.getItems().add(t);
-	    		//ah.addToTable(table, t);
-	    		//ahw.displayAccountHistory(table);
-	    		
-	    		//ObservableList<Transaction> list = table.getItems();
-	    		//list.add(t);
-	    		//table.setItems(list);
-	    		
 	    		System.out.print("set name label to: " + account.getName());
-	    		//HistoryWindow hw = new HistoryWindow();
-	    		//hw.recentName.setText(account.getName() + "S");
-	    		//hw.getRecentName().setText("A");
-	    		//hw.updateText(account.getName());
 	    		
-	    		
-	    		//HistoryWindow hw = new HistoryWindow(account.getName());
-	    		//System.out.println(hw.getRecentName());
-	    		//hw.setRecentName(account.getName());
-	    		//System.out.println(hw.getRecentName());
-	    		//hw.displayHistoryWindow();
-	    		
-	    		//ahw.getA().add(t);
-	    		//ahw.getTable().getItems().add(new Account(account.getName(), account.getAccountType(), depositAmount));
 	    	}	
 		}
-		
-		
     	
     }
 	

@@ -16,28 +16,36 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+/**
+ * When the user clicks the withdraw button from the 
+ * account dashboard this window will appear. The window was 
+ * made with JavaFX.
+ * 
+ * @author Ayan Ahmed
+ *
+ */
 public class WithdrawWindow {
 	private Stage window;
 	
 	TextField amount;
 	Label errorMessage;
 	Account account;
-	
-	FXMLLoader loader = new FXMLLoader(getClass().getResource("src/application/AccountDashboardView.fxml"));
-	//AccountDashboardController acd = loader.getController();
-	
-	//Account account = new Account();
-	AccountDashboardController acd = loader.getController();
-	
-	
+
 	WithdrawWindow(Account anAccount) {
 		account = anAccount;
 	}
 	
+	/**
+	 * This method displays the withdraw button. It includes the title
+	 * for the window, as well as a text field to specify the amount
+	 * to withdraw.
+	 * //Change font in JavaFX found from StackOverflow: https://stackoverflow.com/questions/32624748/javafx-change-font-and-size-in-a-textfield 
+	 * code to change font: (Font.font("Franklin Gothic Medium", 30))
+	 */
 	public void displayWithdrawWindow() {
 		
 		window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
+		window.initModality(Modality.APPLICATION_MODAL); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 		window.setTitle("Withdraw Window");
 		window.setMinHeight(300);
 		window.setMinWidth(500);
@@ -91,10 +99,14 @@ public class WithdrawWindow {
     	
     	Scene scene = new Scene(withdrawContainer);
     	window.setScene(scene);
-    	window.showAndWait();
+    	window.showAndWait(); //Pop-up box line found from StackOverflow: https://stackoverflow.com/questions/31046945/javafx-stage-modality
 	}
     
-	
+	/**
+	 * This method is used to validate the user input, 
+	 * and display an error message depending on 
+	 * the input error.
+	 */
 	public void checkWithdraw() {
 		
 		String withdrawAmountText = amount.getText();
@@ -103,7 +115,7 @@ public class WithdrawWindow {
 		
 		for (char c: amount.getText().toCharArray()) {
     		
-    		// Check if the character is a digit
+    		// Check if the character entered for withdraw is a digit
     		if (!Character.isDigit(c)) {
     			if (c!= '.') {
     				validNumericInput = false;
@@ -123,8 +135,8 @@ public class WithdrawWindow {
 			
 		
 	    	
-	    	// Check if the number entered by the user is a valid percentage grade
-	    	// If valid, include it in the grade computation
+	    	// Check if the number entered by the user is a valid withdraw amount (greater than 0 and less than account balance)
+	    	// If valid, withdraw amount from account balance.
 	    	if (withdrawAmount <= 0) {
 	    		validWithdrawAmount = false;
 	    		errorMessage.setText("Enter a deposit value above $0.00. ");
@@ -137,7 +149,7 @@ public class WithdrawWindow {
 	    		withdrawAmount = 0;
 	    	}
 	    	else if (validWithdrawAmount = true) {
-	    		account.withdraw1(withdrawAmount);
+	    		account.withdraw(withdrawAmount);
 	        	window.close();
 	    	}	
 		}

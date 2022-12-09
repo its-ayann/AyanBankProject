@@ -19,26 +19,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class BankApplicationLoginController {
-	Stage applicationStage;
-	
-	
-	private Stage primaryStage;
-	private Scene myScene;
-	//private ForgotPasswordController nextSceneController;
-	
-	public void setPrimaryStage(Stage aStage) {
-		primaryStage = aStage;
-	}
-	
-	public void setMyScene(Scene aScene) {
-		myScene = aScene;
-	}
-	
-	public void takeFocus() {
-		primaryStage.setScene(myScene);
-	}
 
+/**
+ * When user interacts with the log in window
+ * BankApplicationLoginController consists of methods 
+ * and controls that will give the user with 
+ * what they interact with.
+ * @author Ayan Ahmed
+ *
+ */
+public class BankApplicationLoginController {
+	
+	Stage applicationStage;
+	private Stage primaryStage;
+	private String password = "abc";
+	
     @FXML
     private CheckBox rememberMeCheckBox;
 
@@ -63,7 +58,7 @@ public class BankApplicationLoginController {
     @FXML
     private Label errorMessage;
     
-    private String password = "abc";
+   
     
     public String getPassword() {
     	return password;
@@ -74,6 +69,13 @@ public class BankApplicationLoginController {
     }
   
     
+    /**
+     * When the radio button is clicked the password 
+     * textfield is revealed with whatever is inside it. 
+     * This code to show a password text field was 
+     * found from StackOverflow: https://stackoverflow.com/questions/17014012/how-to-unmask-a-javafx-passwordfield-or-properly-mask-a-textfield
+     * @param event when radio button is clicked show the string in password text field
+     */
     @FXML
     void showPassword(ActionEvent event) {
     	if (showPasswordRadioButton.isSelected()) {
@@ -88,77 +90,46 @@ public class BankApplicationLoginController {
     	
 
     }
+    
+    /**
+     * When the forgotPassword hyper link is clicked 
+     * the user is prompted a new window where they can change their
+     * password or go back to the main log in page.
+     * @param event Prompt new window when hyperlink is clicked.
+     */
 
     @FXML
     void forgotPassword(ActionEvent event) {
     	
     	ChangePasswordView cpv = new ChangePasswordView(password);
     	cpv.displayChangePasswordWindow();
-    	
     	password = cpv.getNewPassword();
    
-    	
-    	/*
-    	try {
-    		
-    		FXMLLoader forgotPasswordLoader = new FXMLLoader();
-			Parent root = FXMLLoader.load(getClass().getResource("ChangePasswordView.fxml"));
-			//VBox root = forgotPasswordLoader.load(new FileInputStream("src/application/ForgotPasswordView.fxml"));
-			Stage window = (Stage) forgotPasswordHyperLink.getScene().getWindow();
-			window.setScene(new Scene(root, 600, 400));
-			
-			
-			//Parent root = forgotPasswordLoader.load(new FileInputStream("src/application/ChangePasswordView.fxml"));
-			
-			//Stage window = (Stage) forgotPasswordHyperLink.getScene().getWindow();
-			//window.setScene(new Scene(root,600,400));
-			
-			//Scene forgotPassword = new Scene(root, 600,400);
-    		
-			//applicationStage.setScene(forgotPassword);
-    		//applicationStage.setTitle("Reset Password");
-			
-			//nextSceneController = forgotPasswordLoader.getController();
-			//nextSceneController.setPrimaryStage(primaryStage);
-			//nextSceneController.setMyScene(new Scene(root));
-			//nextSceneController.setNextController(this);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-
     }
     
 
+    /**
+     * When sign in button is clicked check if account number text field
+     * and password text field is correct. Display error message if not, or show account
+     * dashboard if correct credentials are given in text fields.
+     * @param event check text field input and display message or new window depending on the user input.
+     */
 
     @FXML
     void signIn(ActionEvent event) {
+    	
     	String accountNumber = accountNumberTextField.getText();
     	String passwordGuessed = passwordTextField.getText();
     	if (accountNumber.equals("12-3") && passwordGuessed.equals(password)) {
     		System.out.println("Logged in successfully");
-    		
-    		
+
     		try {
-    			//FXMLLoader accountDashboardLoader = new FXMLLoader();
-    			FXMLLoader loader = new FXMLLoader();
-    			//VBox root = accountDashboardLoader.load(new FileInputStream("src/application/AccountDashboardView.fxml"));
     			
-    			//Parent root = accountDashboardLoader.load(new FileInputStream("src/application/AccountDashboardView.fxml"));
+    			FXMLLoader loader = new FXMLLoader();
     			Parent root = loader.load(new FileInputStream("src/application/AccountDashboardView.fxml"));
     			AccountDashboardController controller = (AccountDashboardController) loader.getController();
-    			
     			controller.applicationStage = primaryStage;
     			Scene accountDashboard = new Scene(root, 600,400);
-    			
-    			
-        		//Stage window = (Stage) signInButton.getScene().getWindow();
-        		//window.setScene(new Scene(root,600,400));
-        		
     			
     			applicationStage.setScene(accountDashboard);
         		applicationStage.setTitle("Account Dashboard");

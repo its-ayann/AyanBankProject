@@ -28,13 +28,21 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 
+/**
+ * When user interacts with the Account Dashboard window, 
+ * AccountDashboardController consists of methods and controls
+ * that will give what the user wants from their input.
+ * @author Ayan Ahmed
+ *
+ */
+
 public class AccountDashboardController {
 	
 	Stage applicationStage;
 	private Stage window;
 	
-	FXMLLoader dashboard = new FXMLLoader();
-	BankApplicationLoginController loginController = dashboard.getController();
+	//FXMLLoader dashboard = new FXMLLoader();
+	//BankApplicationLoginController loginController = dashboard.getController();
 
     @FXML
     private Button historyButton;
@@ -54,18 +62,16 @@ public class AccountDashboardController {
     @FXML
     private Button selectAccountButton;
     
-    
-
-
     @FXML
     private Button transferButton;
  
  
-    private String selectedAccount;
+    //private String selectedAccount;
    
    
     Account chequingAccount = new Account("Ayan Ahmed", 123, 300.00, "CHEQUING ACCOUNT 012432");
-    Account savingAccount = new Account("John Doe", 84190, 800.00, "Saving");
+    Account savingAccount = new Account("John Doe", 84190, 800.00, "SAVINGS ACCOUNT 84190");
+   
     private double initialBalance;
     private double newAmount;
     private double difference;
@@ -98,12 +104,17 @@ public class AccountDashboardController {
  
   
     Account account = new Account();
-    
-
-    
     SelectAccountWindow saw = new SelectAccountWindow();
     
     
+    
+    /**
+     * When user clicks the button to select an account, 
+     * a pop-up window is brought up. Depending on the
+     * account they choose a different name and 
+     * balance will be shown on the dash board.
+     * @param event show pop-up window when button is clicked.
+     */
     
     @FXML
     void selectAccount (ActionEvent event) {
@@ -132,7 +143,12 @@ public class AccountDashboardController {
     	}
 
     }
-   
+    
+    
+   /**
+    * When deposit button is clicked a deposit window is prompted.
+    * @param event display deposit window when button is clicked. 
+    */
     
     @FXML
     void deposit(ActionEvent event) {
@@ -153,16 +169,16 @@ public class AccountDashboardController {
     		balanceLabel.setText(String.format("$ %.2f", savingAccount.getBalance()));
     	}
     	
-    	
-    	
-		
-		
 	System.out.println("chequing: " + chequingAccount.getBalance());
 	System.out.println("dispalyed: " + account.getBalance());
     }
     
     
    
+    /**
+     * When withdraw button is clicked a withdraw window is prompted.
+     * @param event display withdraw window when button is clicked. 
+     */
 
     @FXML
     void withdraw(ActionEvent event) {
@@ -186,11 +202,18 @@ public class AccountDashboardController {
     	
 
     }
+
     
-   
     TransferWindow chequingToSaving = new TransferWindow(savingAccount,chequingAccount);
     TransferWindow savingToChequing = new TransferWindow(chequingAccount,savingAccount);
 
+    /**
+     * When transfer button is clicked a transfer window is prompted.
+     * Depending on the selected account, the option to transfer to
+     * the other account will show. 
+     * @param event display transfer window when button is clicked. 
+     */
+    
     @FXML
     void transfer(ActionEvent event) {
     	System.out.println("transfer" + selectAccountButton.getText());
@@ -216,14 +239,19 @@ public class AccountDashboardController {
     	System.out.println("saving: " + savingAccount.getBalance());
     }
 
-   // DepositWindow dw = new DepositWindow();
+    
+    
+ 
     HistoryWindow hw = new HistoryWindow(account.getName());
-
-
-
-	
     
     
+    /**
+     * When history button is clicked, display
+     * there previous most recent transaction
+     * by name on account, account type, type
+     * of transaction, and the amount.
+     * @param event display history window when button is clicked.
+     */
     @FXML
     void history(ActionEvent event) {
     	
@@ -232,6 +260,7 @@ public class AccountDashboardController {
     	System.out.println(initialSavingBalance);
     	System.out.println(newSavingBalance);
     	
+    	// Transfer from chequing account to saving account
     	if (initialChequingBalance > newChequingBalance && initialSavingBalance < newSavingBalance) {
     		hw.setRecentName(account.getName());
     		hw.setRecentAccount(account.getAccountType());
@@ -246,6 +275,7 @@ public class AccountDashboardController {
     		
     	}
     	
+    	// transfer from saving account to chequing account
     	else if (initialChequingBalance < newChequingBalance && initialSavingBalance > newSavingBalance) {
     		hw.setRecentName(account.getName());
     		hw.setRecentAccount(account.getAccountType());
@@ -259,6 +289,7 @@ public class AccountDashboardController {
     		
     	}
     	
+    	//deposit 
     	else if (initialBalance < newAmount) {
     		hw.setRecentName(account.getName());
         	hw.setRecentAccount(account.getAccountType());
@@ -275,6 +306,7 @@ public class AccountDashboardController {
         	hw.setRecentAmount(String.format("$ %.2f", amount));
         	//hw.displayHistoryWindow();
     	} 
+    	//withdraw
     	else if (initialBalance > newAmount) {
     		hw.setRecentName(account.getName());
         	hw.setRecentAccount(account.getAccountType());
@@ -287,21 +319,18 @@ public class AccountDashboardController {
         	//hw.setRecentAmount(Double.toString(amount));
         	//hw.displayHistoryWindow();
     	}
-    	
     	else {
     		previousHistory();
-    		
     	}
-    	
-    	
-    	
-    	
-    	
     	hw.displayHistoryWindow();
-
     }
     
-    void previousHistory() {
+    /**
+     * Used to store the previous transaction 
+     * and display until another transaction is made.
+     */
+    
+    public void previousHistory() {
     	hw.setRecentName(account.getName());
     	hw.setRecentAccount(account.getAccountType());
     	hw.setRecentType(previous);
